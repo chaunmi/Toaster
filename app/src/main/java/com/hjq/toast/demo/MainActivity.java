@@ -20,7 +20,7 @@ import com.hjq.toast.ToastStrategy;
 import com.hjq.toast.Toaster;
 import com.hjq.toast.style.BlackToastStyle;
 import com.hjq.toast.style.CustomToastStyle;
-import com.hjq.toast.style.WhiteToastStyle;
+import com.hjq.toast.style.TopBlackToastStyle;
 import com.hjq.xtoast.XToast;
 
 /**
@@ -77,14 +77,17 @@ public final class MainActivity extends AppCompatActivity {
     public void switchToastStyleToWhite(View v) {
         ToastParams params = new ToastParams();
         params.text = getString(R.string.demo_switch_to_white_style_result);
-        params.style = new WhiteToastStyle();
+        params.style =  new TopBlackToastStyle(this); //new WhiteToastStyle(this);
         Toaster.show(params);
     }
 
     public void switchToastStyleToBlack(View v) {
         ToastParams params = new ToastParams();
-        params.text = getString(R.string.demo_switch_to_black_style_result);
-        params.style = new BlackToastStyle();
+        params.text =  "我是黑色样式的toast style，最长文案不超过2行，最多可以显示24个字符,我是超长长长长长长" +
+                "。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。" +
+                "。。。。。。。。。。。。。。。。。。。。。。。。。。。。。" +
+                "。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。"; //getString(R.string.demo_switch_to_black_style_result);
+        params.style = new BlackToastStyle(this);
         Toaster.show(params);
     }
 
@@ -173,7 +176,7 @@ public final class MainActivity extends AppCompatActivity {
         new XToast<>(this)
                 .setDuration(1000)
                 // 将 Toaster 中的 View 转移给 XToast 来显示
-                .setContentView(Toaster.getStyle().createView(getApplication()))
+                .setContentView(Toaster.getToastStyle().createView(getApplication()))
                 .setAnimStyle(android.R.style.Animation_Translucent)
                 .setText(android.R.id.message, R.string.demo_combining_xtoast_use_result)
                 .setGravity(Gravity.BOTTOM)

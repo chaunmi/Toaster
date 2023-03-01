@@ -13,6 +13,10 @@ import android.util.TypedValue;
  */
 public class WhiteToastStyle extends BlackToastStyle {
 
+    public WhiteToastStyle(Context context) {
+        super(context);
+    }
+
     @Override
     protected int getTextColor(Context context) {
         return 0XBB000000;

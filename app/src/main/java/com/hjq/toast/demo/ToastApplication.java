@@ -17,6 +17,6 @@ public final class ToastApplication extends Application {
         super.onCreate();
 
         // 初始化 Toast 框架
-        Toaster.init(this);
+        Toaster.init(this, null, null);
     }
 }

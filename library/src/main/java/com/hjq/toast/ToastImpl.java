@@ -8,6 +8,7 @@ import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
@@ -38,6 +39,7 @@ final class ToastImpl {
 
     /** 当前是否全局显示 */
     private boolean mGlobalShow;
+
 
     ToastImpl(Activity activity, CustomToast toast) {
         this((Context) activity, toast);
@@ -140,7 +142,16 @@ final class ToastImpl {
                     | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                     | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
             params.packageName = mPackageName;
+
             params.gravity = mToast.getGravity();
+
+            if ((params.gravity & Gravity.HORIZONTAL_GRAVITY_MASK) == Gravity.FILL_HORIZONTAL) {
+                params.horizontalWeight = 1.0f;
+            }
+            if ((params.gravity & Gravity.VERTICAL_GRAVITY_MASK) == Gravity.FILL_VERTICAL) {
+                params.verticalWeight = 1.0f;
+            }
+
             params.x = mToast.getXOffset();
             params.y = mToast.getYOffset();
             params.verticalMargin = mToast.getVerticalMargin();
